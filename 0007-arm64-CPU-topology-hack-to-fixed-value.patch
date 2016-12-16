@@ -1,0 +1,74 @@
+From e9a40649cc2f8bcec3c0dada9182241b5957a2bd Mon Sep 17 00:00:00 2001
+From: Timmy Li <scuttimmy@qq.com>
+Date: Fri, 25 Nov 2016 10:27:16 +0800
+Subject: [PATCH 7/8] arm64: CPU topology hack to fixed value
+
+---
+ arch/arm64/kernel/topology.c | 30 ++++++++++++++++++++++++++++--
+ 1 file changed, 28 insertions(+), 2 deletions(-)
+
+diff --git a/arch/arm64/kernel/topology.c b/arch/arm64/kernel/topology.c
+index 694f6de..21f164f 100644
+--- a/arch/arm64/kernel/topology.c
++++ b/arch/arm64/kernel/topology.c
+@@ -23,6 +23,8 @@
+ #include <asm/cputype.h>
+ #include <asm/topology.h>
+ 
++#define CPU_TOPOLOGY_HACK	(1)
++
+ static int __init get_cpu_for_node(struct device_node *node)
+ {
+ 	struct device_node *cpu_node;
+@@ -266,11 +268,11 @@ void store_cpu_topology(unsigned int cpuid)
+ 					 MPIDR_AFFINITY_LEVEL(mpidr, 3) << 16;
+ 	}
+ 
+-	pr_debug("CPU%u: cluster %d core %d thread %d mpidr %#016llx\n",
++topology_populated:
++	pr_info("CPU%u: cluster %d core %d thread %d mpidr %#016llx\n",
+ 		 cpuid, cpuid_topo->cluster_id, cpuid_topo->core_id,
+ 		 cpuid_topo->thread_id, mpidr);
+ 
+-topology_populated:
+ 	update_siblings_masks(cpuid);
+ }
+ 
+@@ -292,10 +294,34 @@ static void __init reset_cpu_topology(void)
+ 	}
+ }
+ 
++#ifdef CPU_TOPOLOGY_HACK
++
++#define CPU_CLUSTERS	(4)
++#define NO_CORES_PER_CLUSTERS	(16)
++static void hack_cpu_topology(void)
++{
++	int i;
++	static int fixed_cpu_topo[CPU_CLUSTERS] __initdata = { 256, 768, 1280, 1792 };
++
++	printk("CPU topology: Hacking with fixed value\n");
++
++	for (i = 0; i < CPU_CLUSTERS * NO_CORES_PER_CLUSTERS; i++) {
++		cpu_topology[i].cluster_id = fixed_cpu_topo[i / NO_CORES_PER_CLUSTERS];
++		cpu_topology[i].core_id = i % NO_CORES_PER_CLUSTERS;
++		cpu_topology[i].thread_id = -1;
++	}
++}
++#endif
++
+ void __init init_cpu_topology(void)
+ {
+ 	reset_cpu_topology();
+ 
++#ifdef CPU_TOPOLOGY_HACK
++	hack_cpu_topology();
++
++	return ;
++#endif
+ 	/*
+ 	 * Discard anything that was parsed if we hit an error so we
+ 	 * don't use partial information.
+-- 
+1.9.1
+

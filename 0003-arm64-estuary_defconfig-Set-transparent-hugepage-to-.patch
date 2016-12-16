@@ -1,0 +1,23 @@
+From ea48808e68addcf731f33bc4a1d22e904dd8cae5 Mon Sep 17 00:00:00 2001
+From: Timmy Li <scuttimmy@qq.com>
+Date: Wed, 23 Nov 2016 16:58:33 +0800
+Subject: [PATCH 3/8] arm64: estuary_defconfig: Set transparent hugepage to
+ always
+
+---
+ arch/arm64/configs/estuary_defconfig | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/arch/arm64/configs/estuary_defconfig b/arch/arm64/configs/estuary_defconfig
+index 1d5dbc0..26c44f1 100644
+--- a/arch/arm64/configs/estuary_defconfig
++++ b/arch/arm64/configs/estuary_defconfig
+@@ -61,3 +61,5 @@ CONFIG_BLK_DEV_NVME=y
+ CONFIG_BLK_DEV_NVME_SCSI=y
+ CONFIG_NUMA_BALANCING=y
+ CONFIG_NUMA_BALANCING_DEFAULT_ENABLED=y
++CONFIG_TRANSPARENT_HUGEPAGE_ALWAYS=y
++# CONFIG_TRANSPARENT_HUGEPAGE_MADVISE is not set
+-- 
+1.9.1
+

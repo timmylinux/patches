@@ -1,0 +1,22 @@
+From 9284fe84961b6e91b09d1dfbb1f7ec4b31197857 Mon Sep 17 00:00:00 2001
+From: Timmy Li <scuttimmy@qq.com>
+Date: Thu, 24 Nov 2016 19:59:36 +0800
+Subject: [PATCH 6/8] arm64: estuary_defconfig: enable SCHED_DEBUG to view
+ /proc sched_domain
+
+---
+ arch/arm64/configs/estuary_defconfig | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/arch/arm64/configs/estuary_defconfig b/arch/arm64/configs/estuary_defconfig
+index 3d0c9bb..695666d 100644
+--- a/arch/arm64/configs/estuary_defconfig
++++ b/arch/arm64/configs/estuary_defconfig
+@@ -69,3 +69,4 @@ CONFIG_ARMV8_DEPRECATED=y
+ CONFIG_SWP_EMULATION=y
+ CONFIG_CP15_BARRIER_EMULATION=y
+ CONFIG_SETEND_EMULATION=y
++CONFIG_SCHED_DEBUG=y
+-- 
+1.9.1
+

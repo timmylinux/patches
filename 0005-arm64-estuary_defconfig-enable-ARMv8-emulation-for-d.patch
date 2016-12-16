@@ -1,0 +1,25 @@
+From 43b985b1550e8608653e6e5bf4c3c6b4183beca6 Mon Sep 17 00:00:00 2001
+From: Timmy Li <scuttimmy@qq.com>
+Date: Wed, 23 Nov 2016 22:39:56 +0800
+Subject: [PATCH 5/8] arm64: estuary_defconfig: enable ARMv8 emulation for
+ deprecated inst
+
+---
+ arch/arm64/configs/estuary_defconfig | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/arch/arm64/configs/estuary_defconfig b/arch/arm64/configs/estuary_defconfig
+index a7c8f4e..3d0c9bb 100644
+--- a/arch/arm64/configs/estuary_defconfig
++++ b/arch/arm64/configs/estuary_defconfig
+@@ -65,3 +65,7 @@ CONFIG_TRANSPARENT_HUGEPAGE_ALWAYS=y
+ # CONFIG_TRANSPARENT_HUGEPAGE_MADVISE is not set
+ # CONFIG_PREEMPT_NONE is not set
+ CONFIG_PREEMPT_VOLUNTARY=y
++CONFIG_ARMV8_DEPRECATED=y
++CONFIG_SWP_EMULATION=y
++CONFIG_CP15_BARRIER_EMULATION=y
++CONFIG_SETEND_EMULATION=y
+-- 
+1.9.1
+

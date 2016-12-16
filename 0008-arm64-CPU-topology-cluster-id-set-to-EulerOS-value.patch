@@ -1,0 +1,25 @@
+From 4bb1a7930181e4c941f8956161f0c0a170d37b7b Mon Sep 17 00:00:00 2001
+From: Timmy Li <scuttimmy@qq.com>
+Date: Fri, 25 Nov 2016 11:19:10 +0800
+Subject: [PATCH 8/8] arm64: CPU topology cluster id set to EulerOS value
+
+---
+ arch/arm64/kernel/topology.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/arch/arm64/kernel/topology.c b/arch/arm64/kernel/topology.c
+index 21f164f..4e4578d 100644
+--- a/arch/arm64/kernel/topology.c
++++ b/arch/arm64/kernel/topology.c
+@@ -301,7 +301,7 @@ static void __init reset_cpu_topology(void)
+ static void hack_cpu_topology(void)
+ {
+ 	int i;
+-	static int fixed_cpu_topo[CPU_CLUSTERS] __initdata = { 256, 768, 1280, 1792 };
++	static int fixed_cpu_topo[CPU_CLUSTERS] __initdata = { 0, 1, 2, 3 };
+ 
+ 	printk("CPU topology: Hacking with fixed value\n");
+ 
+-- 
+1.9.1
+

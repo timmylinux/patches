@@ -1,0 +1,23 @@
+From d891c990c9e8e84b4f47ae3a407ffb32da8cb251 Mon Sep 17 00:00:00 2001
+From: Timmy Li <scuttimmy@qq.com>
+Date: Wed, 23 Nov 2016 17:10:21 +0800
+Subject: [PATCH 4/8] arm64: estuary_defconfig: Change scheduler policy from
+ server to voluntary
+
+---
+ arch/arm64/configs/estuary_defconfig | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/arch/arm64/configs/estuary_defconfig b/arch/arm64/configs/estuary_defconfig
+index 26c44f1..a7c8f4e 100644
+--- a/arch/arm64/configs/estuary_defconfig
++++ b/arch/arm64/configs/estuary_defconfig
+@@ -63,3 +63,5 @@ CONFIG_NUMA_BALANCING=y
+ CONFIG_NUMA_BALANCING_DEFAULT_ENABLED=y
+ CONFIG_TRANSPARENT_HUGEPAGE_ALWAYS=y
+ # CONFIG_TRANSPARENT_HUGEPAGE_MADVISE is not set
++# CONFIG_PREEMPT_NONE is not set
++CONFIG_PREEMPT_VOLUNTARY=y
+-- 
+1.9.1
+
